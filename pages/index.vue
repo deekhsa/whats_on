@@ -4,7 +4,7 @@
     
     <div class="flex items-center justify-center w-full mb-6 md:mb-9">
       <p class="text-gray-300 text-justify md:text-center text-2xl w-11/12 md:w-2/3">
-        Discover events near you—food, travel, theater, sports, and more. Browse curated categories or search for specific events, 
+        Discover events near you—food, travel, theatre, sports, and more. Browse curated categories or search for specific events, 
         all tailored to your city. Never miss out on exciting happenings around you!
       </p>
     </div>
