@@ -2,6 +2,7 @@
   <div class="flex flex-col md:flex-row justify-around items-center space-y-4">
     <img class="h-64 w-96 px-4 md:px-0" src="public/icon/logo-2.png" alt="Logo" />
     <UInputMenu
+      v-if="visible"
       v-model="store.city"
       placeholder="Select your city"
       :options="cities"
@@ -33,6 +34,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useLocation } from '@/stores/location'; 
+const props = defineProps(["visible"]);
 
 const store = useLocation(); 
 const cities = ref(["Chennai", "Mumbai", "Delhi", "Pune", "Bengaluru", "Hyderabad", "Kolkata"]);
