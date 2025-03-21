@@ -66,33 +66,43 @@
         </div>
         
         <div v-if="loading" class="text-gray-400 text-center mt-4">Loading...</div>
-          <div v-else-if="restaurants.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+        <div v-else-if="restaurants.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
             <div 
-          v-for="restaurant in restaurants" 
-          :key="restaurant._id" 
-          class="bg-box-secondary p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
-        >
-          <img 
-            :src="restaurant.icon || 'icon/default-image.png'" 
-            :alt="restaurant.icon" 
-            class="w-full h-48 object-cover rounded-lg mb-4"
-          />
+              v-for="restaurant in restaurants" 
+              :key="restaurant._id" 
+              class="bg-box-secondary p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
+            >
+              <img 
+                :src="restaurant.icon || 'icon/default-image.png'" 
+                :alt="restaurant.icon" 
+                class="w-full h-48 object-cover rounded-lg mb-4"
+              />
 
-          <div class="space-y-2">
-            <h2 class="text-xl font-semibold text-white truncate">{{ restaurant.name }}</h2>
-            <p class="text-gray-300 text-sm">{{ restaurant.locality }}</p>
-            <p class="text-sm text-gray-400 truncate">{{ restaurant.cuisines }}</p>
+              <div class="space-y-2">
+                <h2 class="text-xl font-semibold text-white truncate">{{ restaurant.name }}</h2>
+                <p class="text-gray-300 text-sm">{{ restaurant.locality }}</p>
+                <p class="text-sm text-gray-400 truncate">{{ restaurant.cuisines }}</p>
 
-            <div class="flex justify-between items-center mt-3">
-              <p class="text-sm font-semibold text-gray-300">📍 {{ restaurant.distance }} away</p>
-              <p class="text-sm font-medium text-white">₹{{ restaurant.average_cost_for_two }} for two</p>
+                <div class="flex justify-between items-center mt-3">
+                  <p class="text-md font-semibold text-gray-300">📍 {{ restaurant.distance }} away</p>
+                  <p class="text-sm font-medium text-white">₹{{ restaurant.average_cost_for_two }} for two</p>
+                </div>
+
+                <div class="flex justify-between items-center mt-3">
+                  <p class="text-sm text-yellow-400">
+                    ⭐ {{ restaurant.aggregate_rating }}
+                  </p>
+                  <button 
+                    @click="openGoogleMaps(restaurant.location.coordinates[1], restaurant.location.coordinates[0])"
+                    class="p-2 btn btn-link text-secondary underline underline-offset-4 text-sm font-semibold items-center flex"
+                  >
+                    Direction
+                    <UIcon name="i-heroicons-arrow-top-right-on-square" class="h-5 w-5 ml-1 text-secondary"/>
+                  </button>
+                </div>
+              </div>
             </div>
-
-            <p v-if="tabIndex === 1 && restaurant.distance" class="text-sm text-yellow-400 mt-2">
-              ⭐ {{ restaurant.aggregate_rating }}
-            </p>
           </div>
-      </div>
 
 
 
@@ -120,7 +130,6 @@
           </button>
         </div>
       </div> -->
-    </div>
 
     <div v-else class="text-gray-400 text-center mt-12">
       <p class="text-3xl">Oops! No results found for "{{ query }}"</p>
@@ -211,6 +220,12 @@ const fetchRestaurants = async () => {
     loading.value = false
   }
 };
+
+const openGoogleMaps = (lng, lat) => {
+  const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lng},${lat}`;
+  window.open(googleMapsUrl, '_blank');
+};
+
 
 
 // const loadGoogleSearch = () => {
