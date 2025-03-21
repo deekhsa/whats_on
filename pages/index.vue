@@ -55,44 +55,44 @@
     </div> -->
 
     <div v-if="tabIndex === 1" class="flex justify-center mt-4 w-full">
-  <div class="w-11/12 md:w-2/3">
-    <div id="searchBox">
-      <input 
-        v-model="query" 
-        type="text" 
-        placeholder="Search restaurants or cuisines..." 
-        class="w-full p-3 border border-gray-300 rounded-lg bg-box-secondary text-white"
-      />
-    </div>
-    
-    <div v-if="loading" class="text-gray-400 text-center mt-4">Loading...</div>
-    <div v-else-if="restaurants.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-      <div 
-  v-for="restaurant in restaurants" 
-  :key="restaurant._id" 
-  class="bg-box-secondary p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
->
-  <img 
-    :src="restaurant.icon || 'icon/default-image.png'" 
-    :alt="restaurant.icon" 
-    class="w-full h-48 object-cover rounded-lg mb-4"
-  />
+      <div class="w-11/12 md:w-2/3">
+        <div id="searchBox">
+          <input 
+            v-model="query" 
+            type="text" 
+            placeholder="Search restaurants or cuisines..." 
+            class="w-full p-3 border border-gray-300 rounded-lg bg-box-secondary text-white"
+          />
+        </div>
+        
+        <div v-if="loading" class="text-gray-400 text-center mt-4">Loading...</div>
+          <div v-else-if="restaurants.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+            <div 
+          v-for="restaurant in restaurants" 
+          :key="restaurant._id" 
+          class="bg-box-secondary p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
+        >
+          <img 
+            :src="restaurant.icon || 'icon/default-image.png'" 
+            :alt="restaurant.icon" 
+            class="w-full h-48 object-cover rounded-lg mb-4"
+          />
 
-  <div class="space-y-2">
-    <h2 class="text-xl font-semibold text-white truncate">{{ restaurant.name }}</h2>
-    <p class="text-gray-300 text-sm">{{ restaurant.locality }}</p>
-    <p class="text-sm text-gray-400 truncate">{{ restaurant.cuisines }}</p>
+          <div class="space-y-2">
+            <h2 class="text-xl font-semibold text-white truncate">{{ restaurant.name }}</h2>
+            <p class="text-gray-300 text-sm">{{ restaurant.locality }}</p>
+            <p class="text-sm text-gray-400 truncate">{{ restaurant.cuisines }}</p>
 
-    <div class="flex justify-between items-center mt-3">
-      <p class="text-sm font-semibold text-yellow-400">⭐ {{ restaurant.aggregate_rating }}</p>
-      <p class="text-sm font-medium text-white">₹{{ restaurant.average_cost_for_two }} for two</p>
-    </div>
+            <div class="flex justify-between items-center mt-3">
+              <p class="text-sm font-semibold text-gray-300">📍 {{ restaurant.distance }} away</p>
+              <p class="text-sm font-medium text-white">₹{{ restaurant.average_cost_for_two }} for two</p>
+            </div>
 
-    <p v-if="tabIndex === 1 && restaurant.distance" class="text-sm text-gray-300 mt-2">
-      📍 {{ restaurant.distance }} away
-    </p>
-  </div>
-</div>
+            <p v-if="tabIndex === 1 && restaurant.distance" class="text-sm text-yellow-400 mt-2">
+              ⭐ {{ restaurant.aggregate_rating }}
+            </p>
+          </div>
+      </div>
 
 
 
