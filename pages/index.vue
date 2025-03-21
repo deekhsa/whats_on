@@ -191,7 +191,7 @@ const fetchRestaurants = async () => {
       lng: store.lng,
       q: query.value
     };
-    const response = await $fetch(`http://13.235.67.57:9000/restaurants`, {
+    const response = await $fetch(`https://explore.sytes.net/restaurants`, {
       params: params
     });
     response.restaurants.forEach((item) => {
